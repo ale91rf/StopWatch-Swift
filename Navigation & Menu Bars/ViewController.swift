@@ -10,18 +10,45 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var time = 0
+    var mTime = 0
     
+    var mTimer = NSTimer()
+    
+    @IBOutlet weak var mLblTimer: UILabel!
+    
+    @IBAction func play(sender: AnyObject) {
+        
+        mTimer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("increaseTimer"), userInfo: nil, repeats: true)
+        
+    }
+
+    @IBAction func pause(sender: AnyObject) {
+        
+        mTimer.invalidate()
+        
+    }
+    
+    @IBAction func stop(sender: AnyObject) {
+        
+        mTimer.invalidate()
+        mTime = 0
+        mLblTimer.text = "0"
+        
+    }
+    
+    func increaseTimer(){
+        mTime++
+        
+        mLblTimer.text = String(mTime)
+    }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 
